@@ -47,21 +47,11 @@ export default {
   },
   mounted () {
     if (sessionStorage.getItem('name')) {
-      try {
-        this.userName = sessionStorage.getItem('name')
-        this.showForm = true
-      } catch (e) {
-        sessionStorage.removeItem('name')
-      }
+      this.getName()
     }
 
     if (localStorage.getItem('messages')) {
-      try {
-        const newMessages = JSON.parse(localStorage.getItem('messages'))
-        this.messages = newMessages.map(item => ({text: item.text, user: item.user}))
-      } catch (e) {
-        localStorage.removeItem('messages')
-      }
+      this.getMessage()
     }
 
     window.onstorage = event => {
@@ -73,6 +63,21 @@ export default {
     }
   },
   methods: {
+    getName () {
+      try {
+        this.userName = sessionStorage.getItem('name')
+        this.showForm = true
+      } catch (e) {
+        sessionStorage.removeItem('name')
+      }
+    },
+    getMessage () {
+      try {
+        this.messages = JSON.parse(localStorage.getItem('messages'))
+      } catch (e) {
+        localStorage.removeItem('messages')
+      }
+    },
     onStartChat (event) {
       event.preventDefault()
       this.showForm = true
