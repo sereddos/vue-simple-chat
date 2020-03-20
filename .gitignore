@@ -1,5 +1,13 @@
-# Object file
-*.o
+# Default
+.gulp
+.idea
+.vscode
 
-# Ada Library Information
-*.ali
+# Node
+node_modules
+
+# Logs:
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

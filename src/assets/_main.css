@@ -1,0 +1,36 @@
+body {
+  background-color: aliceblue;
+  padding: 20px 0;
+}
+
+.chat__box {
+  margin-bottom: 20px;
+}
+
+.chat__message-wrap {
+  max-height: calc(100vh - 400px);
+  overflow-x: auto;
+}
+
+.chat__form {
+  max-height: 222px;
+}
+
+.message_another-user {
+  text-align: right;
+}
+
+.badge {
+  white-space: normal;
+  text-align: left;
+  word-break: break-word;
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (orientation : landscape) {
+  .chat__message-wrap {
+    max-height: 50vh;
+  }
+}
