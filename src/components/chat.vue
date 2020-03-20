@@ -55,6 +55,16 @@ export default {
         localStorage.removeItem('messages')
       }
     }
+
+    if (sessionStorage.getItem('name')) {
+      try {
+        this.userName = sessionStorage.getItem('name')
+        this.showForm = true
+      } catch (e) {
+        sessionStorage.removeItem('name')
+      }
+    }
+
     window.onstorage = event => {
       if (event.key !== 'messages') {
         return
@@ -68,6 +78,8 @@ export default {
       event.preventDefault()
       this.showForm = true
       this.formTitle = 'Enter something...'
+
+      sessionStorage.setItem('name', this.userName)
     },
     onSubmit (event) {
       event.preventDefault()
