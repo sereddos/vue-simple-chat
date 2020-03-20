@@ -8,8 +8,7 @@
              :key="index"
              class="message"
              :class="{'message_another-user' : isAnotherUser(message)}">
-          <b-badge v-if="isAnotherUser(message)">{{ message.text }}</b-badge>
-          <b-badge v-else variant="success">{{ message.text }}</b-badge>
+          <b-badge>User: {{ message.user }} <br> {{ message.text }}</b-badge>
         </div>
       </div>
     </b-card>
@@ -47,21 +46,21 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem('messages')) {
-      try {
-        const newMessages = JSON.parse(localStorage.getItem('messages'))
-        this.messages = newMessages.map(item => ({text: item.text, user: 'another'}))
-      } catch (e) {
-        localStorage.removeItem('messages')
-      }
-    }
-
     if (sessionStorage.getItem('name')) {
       try {
         this.userName = sessionStorage.getItem('name')
         this.showForm = true
       } catch (e) {
         sessionStorage.removeItem('name')
+      }
+    }
+
+    if (localStorage.getItem('messages')) {
+      try {
+        const newMessages = JSON.parse(localStorage.getItem('messages'))
+        this.messages = newMessages.map(item => ({text: item.text, user: item.user}))
+      } catch (e) {
+        localStorage.removeItem('messages')
       }
     }
 
@@ -88,12 +87,12 @@ export default {
         return
       }
 
-      this.messages.push({text: this.messageText, user: 'this'})
+      this.messages.push({text: this.messageText, user: this.userName})
       this.messageText = ''
       this.saveMessage()
     },
     isAnotherUser (message) {
-      return message.user === 'another'
+      return message.user !== this.userName
     },
     saveMessage () {
       const parsed = JSON.stringify(this.messages)
@@ -101,7 +100,7 @@ export default {
     },
     updateMessage (event) {
       const newDate = JSON.parse(event.newValue)
-      this.messages.push({text: newDate[newDate.length - 1].text, user: 'another'})
+      this.messages.push({text: newDate[newDate.length - 1].text, user: newDate[newDate.length - 1].user})
     }
   }
 }

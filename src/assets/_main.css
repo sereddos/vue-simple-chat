@@ -16,14 +16,22 @@ body {
   max-height: 222px;
 }
 
-.message_another-user {
-  text-align: right;
-}
-
 .badge {
   white-space: normal;
   text-align: left;
   word-break: break-word;
+  line-height: 13px;
+  margin-bottom: 4px;
+  font-size: 11px;
+}
+
+.message_another-user {
+  text-align: right;
+}
+
+.message_another-user .badge {
+  background-color: green;
+  text-align: right;
 }
 
 @media only screen
