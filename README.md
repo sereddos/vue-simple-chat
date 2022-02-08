@@ -1,6 +1,6 @@
 # simple-chat
 
-> A Vue.js project
+> Test Vue.js project
 
 ## Build Setup
 
